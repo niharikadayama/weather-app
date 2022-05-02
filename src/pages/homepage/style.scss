@@ -1,0 +1,154 @@
+@import "styles/colors.scss";
+@import "styles/styleFunctions.scss";
+
+.container{
+    @include container-props(fixed);
+    @include flex-props(center,center);
+    .card{
+        position: relative;
+        color: $white;
+        @include width-height(1440px,900px);
+        background: linear-gradient(to right top, $primary-light, $primary, $primary-dark, $secondary-light, $secondary);
+        .left{
+            @include width-height(864px, 900px);
+            @include flex-direction(column);
+           .left-row-1{
+                padding: 0 163px 0 66px;
+                @include width-height(100%,167px);
+                .moon-cloud{
+                    .moon{
+                        @include absolute_top_left(66px,69.06px);
+                        @include width-height(74.47px,74.89px);
+                    }
+                    .top-cloud{ 
+                        @include absolute_top_left(79.53px, 82.07px);
+                        @include width-height(127.14px, 79.53px);
+                    }
+                }
+                .temp-converter{
+                position: absolute;
+                width: 91.2px;
+                height: 40px;
+                top: 63px;
+                left: 701px;
+                background-color: rgba(255, 255, 255, 0.16);
+                border-radius: 100px;
+                button{
+                        all: unset; 
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 24px;
+                        line-height: 29px;
+                        color: #fff;
+                }
+                    .fahrenheit {
+                        width: 52.8px;
+                        height: 40px;
+                        background: rgba(255, 255, 255, 0.18);
+                        border-radius: 100px;
+                        text-align: center;
+                    }
+                    .celcius{
+                        padding-left: 5px;
+                    }
+                }
+           }
+           .left-row-2{
+                padding-left: 66px;
+                margin-top:10px;
+                @include flex-props(column,flex-start);
+                @include flex-direction-alignment(column,flex-start);
+                .temp{
+                    margin: 0;  
+                    @include width-height(192px, 197px);
+                    @include font-styles('Inter',normal,100,164px,120%,-6.51px 4.26px 2.75px $black-opacity-0_1);
+                    span{
+                        @include width-height(43px, 38px);
+                        @include absolute_top_left(196px,268px);
+                        @include font-styles(sans-serif,normal,400,32px,120%,-4.51px 2.26px 0.75px $black-opacity-0_1);
+                        letter-spacing: -0.05em;
+                    }
+                }
+                .date{
+                    padding-left: 10px;
+                    margin: 10px 0 0 0;
+                    @include font-styles('Inter', normal, 400, 36px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
+                }
+                .date-time{
+                    margin: 10px 0 0 0;
+                    padding-left: 10px;
+                    @include flex-props(row,stretch,space-between);
+                    @include width-height(237px,28px);
+                    p{
+                        margin: 0;
+                        @include font-styles('Inter', normal, 400, 24px, 120%, -1.51px 1.26px 0.75px $black-opacity-0_1);
+                    }
+                }
+           }
+           .left-row-3{
+                padding-left: 78px;
+                @include flex-direction();
+                margin: 30px 0 70px 0;
+                .separator {
+                    padding: 10px 20px 0 8px;
+                }
+            }
+            .left-row-4{
+                @include flex-direction();
+                padding-left: 76px;
+            }
+            .forward-arrow {
+                all: unset;
+                @include width-height(33.5px,14.5px);
+                @include absolute_top_left(728px,749.5px);
+                img {
+                    filter: drop-shadow(0px 4px 4px $black-opacity-0_25);
+                }
+            }
+        }
+        .right{
+            @include width-height(576px, 900px);
+            @include absolute_top_left(0px, 864px);
+            right: 0;
+            border: 2px solid linear-gradient($white-opacity-0_4, $white-opacity-0_2);
+            background: radial-gradient(100% 100% at 0% 0%, $white-opacity-0_4 0%, $white-opacity-0 100%);
+            box-shadow: -5px -5px 250px rgba(255, 255, 255, 0.02) inset;
+            backdrop-filter: blur(42px);
+            .right-row-1{
+                form{
+                    padding: 36px 0 0 27px;
+                    input{
+                        padding: 0;
+                        @include width-height(505px,64px);
+                        border-width: 0;
+                        border-radius: 20px;
+                        backdrop-filter: blur(100px);
+                        background: linear-gradient(116.79deg, rgba(255, 255, 255, 0.48) -41.94%, rgba(255, 255, 255, 0.12) 57.51%);
+                    }
+                    button{
+                        all:unset;
+                        @include absolute_top_left(55px);
+                        right: 63.64px;
+                        @include width-height(25.36px,26px);
+                        img{
+                            @include width-height(100%,100%);
+                        }
+                    }
+                }
+            }
+            .right-row-2{
+                padding: 127px 61px 9px 57px;
+                @include flex-props(row,stretch,space-between);
+            }
+            hr{
+                border: 0.6px solid $white;
+                margin: 68px 50px;
+            }
+            .right-row-3{
+                @include flex-direction();
+                @include width-height(100%);
+            }
+        }
+    }
+}

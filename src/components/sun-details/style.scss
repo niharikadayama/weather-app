@@ -1,0 +1,98 @@
+@import "styles/colors.scss";
+@import "styles/styleFunctions";
+
+.sun-details {
+    @include flex-direction(column);
+    .title {
+        @include font-styles('Inter', normal, 400, 28px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
+    }
+    .clock {
+        @include width-height(105px,210px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background: rgba(255, 255, 255, 0.26);
+        border-radius: 100px;
+        .clock-img{
+            position: relative;
+            @include width-height(auto,84px);
+            hr{
+                @include width-height(34.27px);
+                @include absolute-top-left(auto,-35px);
+                border: 3px solid $calm-grey !important;
+            }
+            .hour-hand{
+                @include absolute-top-left(46px,44px);
+            }
+            .second-hand{
+                @include absolute-top-left(37px, 50px);
+            }
+        }
+        .t-1 {
+            text-align: center;
+            @include font-styles('Inter', normal, 400, 28px, 34px);
+            margin-bottom: 0px;
+        }
+
+        .t-2 {
+            text-align: center;
+            @include font-styles('Inter', normal, 400, 22px, 27px);
+            color: $faded-white;
+            margin: 7px 0 30px 0;
+        }
+    }
+}
+
+.golden-hour{
+    @include absolute-top-left(164px,202px);
+    @include flex-direction-alignment(column,center);
+    .title{
+        @include font-styles('Inter', normal, 400, 28px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
+    }
+    .clock{
+        @include width-height(130px,245px);
+        @include flex-direction-alignment(column, center);
+        justify-content: space-evenly;
+        background: rgba(255, 255, 255, 0.26);
+        border-radius: 100px;
+        .clock-img {
+            position: relative;
+            height: 84px;
+            hr {
+                @include width-height(34.27px);
+                @include absolute-top-left(auto, -90px);
+                border: 3px solid $calm-grey !important;
+            }
+        
+            .hour-hand {
+                @include absolute-top-left(40px, -10px);
+                @include width-height(auto,32px);
+            }
+        
+            .second-hand {
+                @include absolute-top-left(26px, -1px);
+                @include width-height(auto, 48px);
+            }
+        }
+        .t-1{
+            @include font-styles('Inter', normal, 400, 29px, 35px);
+            margin-bottom: 0px;
+            &::after{
+                content: " AM";
+                font-size: 18px;
+                line-height: 21.78px;
+            }
+        }
+        .t-2{
+            @include font-styles('Inter', normal, 400, 24px, 29px);
+            text-align: center;
+            color: $faded-white;
+            margin: 7px 0 30px 0;
+            &::after {
+                content: " PM";
+                font-size: 18px;
+                line-height: 21.78px;
+            }
+        }
+    }
+}

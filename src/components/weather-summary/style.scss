@@ -1,0 +1,34 @@
+@import "styles/colors.scss";
+@import "styles/styleFunctions.scss";
+
+.rectangle {
+    margin-right: 54px;
+    @include width-height(auto,200px);
+    .rectangle-info{
+        position: relative;
+        @include width-height(110px, 100%);
+        border: 1px solid $white-opacity-0_3;
+        border-radius: 11.3852px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .blur{
+            @include container-props(absolute,0%,0%,0%,0%);
+            border-radius: 11.3852px;
+            background-color: $white-opacity-0_2;
+            // backdrop-filter: blur(1.13852px);
+        }
+        p{
+            @include font-styles('Overpass', normal, 600, 24px, 30px, -1.13852px 1.70778px 0.569258px $black-opacity-0_1);
+            text-align: center;  
+            span{
+                font-weight: 400;
+            }
+        }
+        img{
+            @include width-height(35.95px);
+            align-self: center;
+            filter: drop-shadow(5px 5px 5px $black-opacity-0_2);
+        }
+    } 
+}
