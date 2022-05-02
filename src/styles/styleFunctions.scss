@@ -1,7 +1,42 @@
-@mixin containerProps($position, $top, $right, $bottom, $left) {
+@import "./colors.scss";
+
+@mixin container-props($position, $top:0, $right:0, $bottom:0, $left:0) {
     position: $position;
     top: $top;
     right: $right;
     bottom: $bottom;
     left: $left;
 }
+@mixin absolute_top_left ($top:auto,$left:auto){
+    position: absolute;
+    top: $top;
+    left: $left;
+}
+@mixin flex-props ($direction:row,$align:stretch,$justify:flex-start){
+    display: flex;
+    $direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+@mixin flex-direction ($direction:row){
+    display: flex;
+    flex-direction: $direction;
+}
+@mixin flex-direction-alignment ($direction:row,$align) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+}
+@mixin width-height ($width,$height:auto) {
+    width: $width;
+    height: $height;
+}
+@mixin font-styles($family,$style:normal,$weight,$size,$line-height,$textShadow:none) {
+    font-family: $family;
+    font-style: $style;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: $line-height;
+    text-shadow: $textShadow;
+}
+

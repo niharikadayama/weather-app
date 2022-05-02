@@ -1,16 +1,23 @@
 import React from "react";
-import { Images } from "../../constants/images";
+import { WeatherDetail, WeatherSummary, SunDetails, AQI_UV } from "components";
+import { Images } from "constant/images";
 import "./style.scss";
 
 function Homepage() {
+  const { moon, topCloud, direction, water, rainy, next, search } = Images;
   return (
     <div className="container">
-      <div className="card">
-        <div className="card-style left">
+      <section className="card">
+        <div className="left">
           <div className="left-row-1">
-            <img src={Images.moon} alt="moon" className="moon" />
-            <div>
-              <button className="fahrenheit">F</button>
+            <div className="moon-cloud">
+              <img src={moon} alt="moon" className="moon" />
+              <img src={topCloud} alt="cloud" className="top-cloud" />
+            </div>
+            <div className="temp-converter">
+              <button className="fahrenheit">
+                <span>F</span>
+              </button>
               <button className="celcius">C</button>
             </div>
           </div>
@@ -26,122 +33,83 @@ function Homepage() {
             </div>
           </div>
           <div className="left-row-3">
-            <div className="weather-detail">
-              <img src={Images.direction} alt="Wind" />
-              <p>Wind</p>
-              <p>10km/h</p>
-            </div>
+            <WeatherDetail
+              image={direction}
+              imageDetail={"Wind"}
+              title={"Wind"}
+              info={"10km/h"}
+            />
             <p className="separator">|</p>
-            <div className="weather-detail">
-              <img src={Images.water} alt="Hum" />
-              <p>Hum</p>
-              <p>54%</p>
-            </div>
+            <WeatherDetail
+              image={water}
+              imageDetail={"Hum"}
+              title={"Hum"}
+              info={"54%"}
+            />
             <p className="separator">|</p>
-            <div className="weather-detail">
-              <img src={Images.rainy} alt="rain" />
-              <p>Rain</p>
-              <p>0.2%</p>
-            </div>
+            <WeatherDetail
+              image={rainy}
+              imageDetail={"Rain"}
+              title={"Rain"}
+              info={"0.2%"}
+            />
           </div>
           <div className="left-row-4">
-            <div className="rectangle">
-              <div className="rectangle-info">
-                <p>
-                  24<span>&#8451;</span>
-                </p>
-                <img src={Images.cloud} alt="weather" />
-                <p>Tue</p>
-              </div>
-            </div>
-            <div className="rectangle">
-              <div className="rectangle-info">
-                <p>
-                  24<span>&#8451;</span>
-                </p>
-                <img src={Images.cloud} alt="weather" />
-                <p>Wed</p>
-              </div>
-            </div>
-            <div className="rectangle">
-              <div className="rectangle-info">
-                <p>
-                  24<span>&#8451;</span>
-                </p>
-                <img src={Images.cloud} alt="weather" />
-                <p>Thur</p>
-              </div>
-            </div>
-            <div className="rectangle">
-              <div className="rectangle-info">
-                <p>
-                  24<span>&#8451;</span>
-                </p>
-                <img src={Images.cloud} alt="weather" />
-                <p>Fri</p>
-              </div>
-            </div>
+            <WeatherSummary temp={24} day={"Tue"} />
+            <WeatherSummary temp={24} day={"Wed"} />
+            <WeatherSummary temp={24} day={"Thur"} />
+            <WeatherSummary temp={24} day={"Fri"} />
           </div>
           <button className="forward-arrow">
-            <img src={Images.next} alt="forward-arrow" />
+            <img src={next} alt="forward-arrow" />
           </button>
         </div>
-        <div className="card-style right">
+        <div className="right">
           <div className="right-row-1">
-            {/* <button type="submit" className="location-pin">
-              <img src={Images.location} alt="location-pin" />
-            </button> */}
             <form>
               <input type="text" />
               <button type="submit">
-                <img src={Images.search} alt="search-button" />
+                <img src={search} alt="search-button" />
               </button>
             </form>
           </div>
           <div className="right-row-2">
-            <div className="sun-details">
-              <p className="title">Sunrise</p>
-              <div className="clock">
-                <div className="clock-img">
-                  <img src={Images.clock} alt="clock" />
-                </div>
-                <p className="t-1">11:24</p>
-                <p className="t-2">11:45</p>
-              </div>
-            </div>
-            <div className="sun-details">
-              <p className="title">Sunset</p>
-              <div className="clock">
-                <div className="clock-img">
-                  <img src={Images.clock} alt="clock" />
-                </div>
-                <p className="t-1">07:21</p>
-                <p className="t-2">07:25</p>
-              </div>
-            </div>
+            <SunDetails
+              title="Sunrise"
+              time1="11:32"
+              time2="11:46"
+              styleExist={true}
+            />
+            <SunDetails
+              title="Golden Hour"
+              time1="6:00"
+              time2="6:49"
+              styleExist={false}
+            />
+            <SunDetails
+              title="Sunset"
+              time1="7:21"
+              time2="7:25"
+              styleExist={true}
+            />
           </div>
           <hr></hr>
           <div className="right-row-3">
-            <div>
-              <p>Air Quality</p>
-              <div className="half-arc">
-                <span className="label">
-                  2/5<br></br>Moderate
-                </span>
-              </div>
-            </div>
-            <div>
-              <p>UV Index</p>
-              <div className="half-arc">
-                <span className="label">
-                  6/10<br></br>high
-                </span>
-              </div>
-            </div>
-            <p className="sec-1">|</p>
+            <AQI_UV
+              title={"Air Quality"}
+              quantity={"2 / 5"}
+              rate={"Moderate"}
+              dotPosition={"ball-aqi"}
+            />
+            <AQI_UV
+              title={"UV Index"}
+              quantity={"6 / 10"}
+              rate={"High"}
+              dotPosition={"ball-uv"}
+            />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,0 +1,46 @@
+@import "styles/colors.scss";
+@import "styles/styleFunctions";
+
+.aqi-uv{
+    padding: 0 60px;
+    .title{
+        margin-top: 0;
+        padding-left:28px;
+        padding-bottom: 10px;
+        @include font-styles('Inter', normal, 400, 28px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
+    }
+    .meter{
+        position: relative;
+        padding: 36.78px 0 0 0;
+        .vector2{
+            @include absolute_top_left(6px,12px);
+        }
+        .vector3{
+            @include absolute_top_left(-7px,46px);
+        }
+        .vector4{
+            @include absolute_top_left(-7px,91px);
+        }
+        .vector5{
+            @include absolute_top_left(5px,133px);
+        }
+        .vector6{
+            @include absolute_top_left(auto,162px);
+        }
+        .rate{
+            margin: -60px 0 0 0;
+            padding-left: 20px;
+            @include font-styles('Inter', normal, 400, 19px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
+            text-align: center; 
+        }
+        .ball-aqi{
+            @include absolute_top_left(28px,12px);
+            @include width-height(16px,16px);
+        }
+        .ball-uv{
+            @include absolute_top_left(3px);
+            @include width-height(16px, 16px);
+            right: 0;
+        }
+    }
+}
