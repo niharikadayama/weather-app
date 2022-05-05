@@ -1,0 +1,29 @@
+@import 'styles/colors.scss';
+@import 'styles/styleFunctions.scss';
+
+form {
+    padding: 36px 0 0 27px;
+    input {
+        @include width-height(505px, 64px);
+        border-width: 0;
+        border-radius: 20px;
+        font-size: 24px;
+        color: $secondary;
+        backdrop-filter: blur(100px);
+        background: linear-gradient(116.79deg, rgba(255, 255, 255, 0.48) -41.94%, rgba(255, 255, 255, 0.12) 57.51%);
+        box-sizing: border-box;
+        padding-left: 18px;
+        &::placeholder{
+            color: $secondary;
+        }
+    }
+    button {
+        all: unset;
+        @include absolute_top_left(55px);
+        right: 63.64px;
+        @include width-height(25.36px, 26px);
+        img {
+            @include width-height(100%, 100%);
+        }
+    }
+}
