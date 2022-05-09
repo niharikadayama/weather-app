@@ -4,7 +4,7 @@ import "./style.scss";
 
 interface aqi_uv {
   title: string;
-  quantity: string;
+  quantity: string | number;
   rate: string;
   dotPosition: string;
 }

@@ -3,6 +3,7 @@
 
 .sun-details {
     @include flex-direction(column);
+    justify-content: flex-end;
     .title {
         @include font-styles('Inter', normal, 400, 28px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
     }
@@ -44,7 +45,7 @@
 }
 
 .golden-hour{
-    @include absolute-top-left(164px,202px);
+    // @include absolute-top-left(164px,202px);
     @include flex-direction-alignment(column,center);
     .title{
         @include font-styles('Inter', normal, 400, 28px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);

@@ -12,23 +12,34 @@ function Homepage() {
   const [searchedLocation, setSearchedLocation] = useState();
   const [isSearched, setIsSearched] = useState(false);
   const [isFahrenheit, setIsFahrenheit] = useState(false);
+  const [isActive, setActive] = useState(false);
   const { getData, submitRequest } = API();
+
   useEffect(() => {
     getData().then((data) => {
       setCurrentLocationDetails(data);
       setLoading(false);
     });
   }, [getData]);
+
   const handleChange = (e) => {
     setSearchedLocation(e.target.value);
   };
+
+  const handleToggle = (val) => {
+    setActive(!isActive);
+    setIsFahrenheit(() => val);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const searchedData = await submitRequest(searchedLocation);
     setSearchedLocationDetails(searchedData);
     setIsSearched(true);
   };
+
   const { direction, water, rainy, next, search } = Images;
+
   return (
     <>
       {isLoading || currentLocationDetails === null ? (
@@ -47,14 +58,16 @@ function Homepage() {
                 </div>
                 <div className="temp-converter">
                   <button
-                    className="fahrenheit"
-                    onClick={() => setIsFahrenheit(true)}
+                    className={
+                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                    }
+                    onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className="celcius"
-                    onClick={() => setIsFahrenheit(false)}
+                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    onClick={() => handleToggle(false)}
                   >
                     C
                   </button>
@@ -119,10 +132,17 @@ function Homepage() {
               <div className="left-row-4">
                 <div className="weather-summary">
                   <WeatherSummary
-                    temp={Math.round(
-                      currentLocationDetails.forecast.forecastday[0].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       currentLocationDetails.forecast.forecastday[0].day
                         .condition.icon
@@ -130,12 +150,20 @@ function Homepage() {
                     day={moment(
                       currentLocationDetails.forecast.forecastday[0].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                   <WeatherSummary
-                    temp={Math.round(
-                      currentLocationDetails.forecast.forecastday[1].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       currentLocationDetails.forecast.forecastday[1].day
                         .condition.icon
@@ -143,12 +171,20 @@ function Homepage() {
                     day={moment(
                       currentLocationDetails.forecast.forecastday[1].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                   <WeatherSummary
-                    temp={Math.round(
-                      currentLocationDetails.forecast.forecastday[2].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            currentLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       currentLocationDetails.forecast.forecastday[2].day
                         .condition.icon
@@ -156,6 +192,7 @@ function Homepage() {
                     day={moment(
                       currentLocationDetails.forecast.forecastday[2].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                 </div>
                 <button className="forward-arrow">
@@ -173,11 +210,10 @@ function Homepage() {
                     placeholder={currentLocationDetails.location.name}
                     onChange={(e) => handleChange(e)}
                   />
-                  <button type="submit">
+                  <button type="submit" className="submitButton">
                     <img src={search} alt="search-button" />
                   </button>
                 </form>
-                {/* {isError && <p>No such city</p>} */}
               </div>
               <div className="right-row-2">
                 <SunDetails
@@ -215,13 +251,15 @@ function Homepage() {
               <div className="right-row-3">
                 <AQI_UV
                   title={"Air Quality"}
-                  quantity={2}
+                  quantity={
+                    currentLocationDetails.current.air_quality["us-epa-index"]
+                  }
                   rate={"Moderate"}
                   dotPosition={"ball-aqi"}
                 />
                 <AQI_UV
                   title={"UV Index"}
-                  quantity={"6 / 10"}
+                  quantity={currentLocationDetails.current.uv}
                   rate={"High"}
                   dotPosition={"ball-uv"}
                 />
@@ -243,14 +281,16 @@ function Homepage() {
                 </div>
                 <div className="temp-converter">
                   <button
-                    className="fahrenheit"
-                    onClick={() => setIsFahrenheit(true)}
+                    className={
+                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                    }
+                    onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className="celcius"
-                    onClick={() => setIsFahrenheit(false)}
+                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    onClick={() => handleToggle(false)}
                   >
                     C
                   </button>
@@ -315,10 +355,17 @@ function Homepage() {
               <div className="left-row-4">
                 <div className="weather-summary">
                   <WeatherSummary
-                    temp={Math.round(
-                      searchedLocationDetails.forecast.forecastday[0].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       searchedLocationDetails.forecast.forecastday[0].day
                         .condition.icon
@@ -326,12 +373,20 @@ function Homepage() {
                     day={moment(
                       searchedLocationDetails.forecast.forecastday[0].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                   <WeatherSummary
-                    temp={Math.round(
-                      searchedLocationDetails.forecast.forecastday[1].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       searchedLocationDetails.forecast.forecastday[1].day
                         .condition.icon
@@ -339,12 +394,20 @@ function Homepage() {
                     day={moment(
                       searchedLocationDetails.forecast.forecastday[1].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                   <WeatherSummary
-                    temp={Math.round(
-                      searchedLocationDetails.forecast.forecastday[2].day
-                        .avgtemp_c
-                    )}
+                    temp={
+                      !isFahrenheit
+                        ? Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_c
+                          )
+                        : Math.round(
+                            searchedLocationDetails.forecast.forecastday[0].day
+                              .avgtemp_f
+                          )
+                    }
                     img={
                       searchedLocationDetails.forecast.forecastday[2].day
                         .condition.icon
@@ -352,6 +415,7 @@ function Homepage() {
                     day={moment(
                       searchedLocationDetails.forecast.forecastday[2].date
                     ).format("ddd")}
+                    degree={!isFahrenheit}
                   />
                 </div>
                 <button className="forward-arrow">
@@ -369,11 +433,10 @@ function Homepage() {
                     placeholder={searchedLocationDetails.location.name}
                     onChange={(e) => handleChange(e)}
                   />
-                  <button type="submit">
+                  <button type="submit" className="submitButton">
                     <img src={search} alt="search-button" />
                   </button>
                 </form>
-                {/* {isError && <p>No such city</p>} */}
               </div>
               <div className="right-row-2">
                 <SunDetails
@@ -411,13 +474,15 @@ function Homepage() {
               <div className="right-row-3">
                 <AQI_UV
                   title={"Air Quality"}
-                  quantity={2}
+                  quantity={
+                    searchedLocationDetails.current.air_quality["us-epa-index"]
+                  }
                   rate={"Moderate"}
                   dotPosition={"ball-aqi"}
                 />
                 <AQI_UV
                   title={"UV Index"}
-                  quantity={"6 / 10"}
+                  quantity={searchedLocationDetails.current.uv}
                   rate={"High"}
                   dotPosition={"ball-uv"}
                 />
