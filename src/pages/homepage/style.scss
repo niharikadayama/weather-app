@@ -1,158 +1,272 @@
 @import "styles/colors.scss";
 @import "styles/styleFunctions.scss";
 
-.container{
-    // @include container-props(fixed);
-    @include flex-props(center,center);
-    .card{
-        position: relative;
-        color: $white;
+.container {
+  // @include container-props(fixed);
+  // @include width-height(100%, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .card {
+    position: relative;
+    color: $white;
+    display: flex;
+    @include width-height(94%, auto);
+    background: linear-gradient(
+      to right top,
+      $primary-light,
+      $primary,
+      $primary-dark,
+      $secondary-light,
+      $secondary
+    );
+    .left {
+      flex: 4 1 auto;
+      margin: 50px 0 0 66px;
+      @include flex-direction(column);
+      .left-row-1 {
+        padding-right: 40px;
+        @include flex-direction(row);
+        justify-content: space-between;
+        .moon-cloud {
+          .moon {
+            @include width-height(74.47px, 74.89px);
+          }
+          .top-cloud {
+            @include absolute_top_left(79.53px, 82.07px);
+            @include width-height(127.14px, 79.53px);
+          }
+          .weatherIcon {
+            @include width-height(80px, 80px);
+          }
+        }
+        .temp-converter {
+          width: 91.2px;
+          height: 40px;
+          display: flex;
+          background-color: rgba(255, 255, 255, 0.16);
+          border-radius: 100px;
+          button {
+            all: unset;
+            font-family: "Inter";
+            cursor: pointer;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 29px;
+            color: #fff;
+          }
+          .fahrenheit {
+            flex: 1 1 auto;
+            text-align: center;
+          }
+          .celcius {
+            flex: 1 1 auto;
+            text-align: center;
+          }
+          .selectedTemp{
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 100px;
+          }
+        }
+      }
+      .left-row-2 {
+        margin-top: 18px;
+        @include flex-props(column, flex-start);
+        @include flex-direction-alignment(column, flex-start);
+        .temp {
+          margin: 0;
+          display: flex;
+          @include font-styles(
+            "Inter",
+            normal,
+            100,
+            164px,
+            120%,
+            -6.51px 4.26px 2.75px $black-opacity-0_1
+          );
+        }
+        .degree_celsius {
+          @include width-height(43px, 38px);
+          @include font-styles(
+            sans-serif,
+            normal,
+            400,
+            32px,
+            120%,
+            -4.51px 2.26px 0.75px $black-opacity-0_1
+          );
+          letter-spacing: -0.05em;
+        }
+        .degree_fahrenheit {
+          @include width-height(43px, 38px);
+          // @include absolute_top_left(196px, 330px);
+          @include font-styles(
+            sans-serif,
+            normal,
+            400,
+            32px,
+            120%,
+            -4.51px 2.26px 0.75px $black-opacity-0_1
+          );
+          letter-spacing: -0.05em;
+        }
+        .date {
+          padding-left: 10px;
+          margin: 10px 0 0 0;
+          @include font-styles(
+            "Inter",
+            normal,
+            400,
+            36px,
+            120%,
+            -1.51px 2.26px 0.75px $black-opacity-0_1
+          );
+        }
+        .date-time {
+          margin: 10px 0 0 0;
+          padding-left: 10px;
+          @include flex-props(row, stretch, space-between);
+          @include width-height(250px, 28px);
+          p {
+            margin: 0;
+            @include font-styles(
+              "Inter",
+              normal,
+              400,
+              24px,
+              120%,
+              -1.51px 1.26px 0.75px $black-opacity-0_1
+            );
+          }
+        }
+      }
+      .left-row-3 {
+        padding-left: 12px;
+        @include flex-direction();
+        margin: 20px 0 30px 0;
+        .separator {
+          padding: 10px 20px 0 8px;
+        }
+      }
+      .left-row-4 {
+        @include flex-direction(row);
+        padding: 0 80px 20px 10px;
         display: flex;
-        // @include width-height(1440px,900px);
-        background: linear-gradient(to right top, $primary-light, $primary, $primary-dark, $secondary-light, $secondary);
-        .left{
-            flex: 2 1 auto;
-            margin: 69px 0 0 66px;
-            // @include width-height(864px, 900px);
-            @include flex-direction(column);
-           .left-row-1{
-                // padding: 0 163px 0 66px;
-                padding-right: 40px;
-                // @include width-height(auto,167px);
-                @include flex-direction(row);
-                justify-content: space-between;
-                .moon-cloud{
-                    .moon{
-                        // @include absolute_top_left(66px,69.06px);
-                        @include width-height(74.47px,74.89px);
-                    }
-                    .top-cloud{ 
-                        @include absolute_top_left(79.53px, 82.07px);
-                        @include width-height(127.14px, 79.53px);
-                    }
-                    .weatherIcon{
-                        // @include absolute_top_left(66px, 69.06px);
-                        @include width-height(80px,80px);
-                    }
-                }
-                .temp-converter{
-                // position: absolute;
-                width: 91.2px;
-                height: 40px;
-                // top: 63px;
-                // left: 701px;
-                background-color: rgba(255, 255, 255, 0.16);
-                border-radius: 100px;
-                button{
-                        all: unset; 
-                        font-family: 'Inter';
-                        cursor: pointer;
-                        font-style: normal;
-                        font-weight: 400;
-                        font-size: 24px;
-                        line-height: 29px;
-                        color: #fff;
-                }
-                    .fahrenheit {
-                        width: 52.8px;
-                        height: 40px;
-                        background: rgba(255, 255, 255, 0.18);
-                        border-radius: 100px;
-                        text-align: center;
-                    }
-                    .celcius{
-                        padding-left: 5px;
-                    }
-                }
-           }
-           .left-row-2{
-                margin-top:18px;
-                @include flex-props(column,flex-start);
-                @include flex-direction-alignment(column,flex-start);
-                .temp{
-                    margin: 0;  
-                    @include width-height(192px, 197px);
-                    @include font-styles('Inter',normal,100,164px,120%,-6.51px 4.26px 2.75px $black-opacity-0_1);
-                }
-                .degree_celsius {
-                    @include width-height(43px, 38px);
-                    @include absolute_top_left(196px, 268px);
-                    @include font-styles(sans-serif, normal, 400, 32px, 120%, -4.51px 2.26px 0.75px $black-opacity-0_1);
-                    letter-spacing: -0.05em;
-                }
-                .degree_fahrenheit {
-                    @include width-height(43px, 38px);
-                    @include absolute_top_left(196px, 330px);
-                    @include font-styles(sans-serif, normal, 400, 32px, 120%, -4.51px 2.26px 0.75px $black-opacity-0_1);
-                    letter-spacing: -0.05em;
-                }
-                .date{
-                    padding-left: 10px;
-                    margin: 10px 0 0 0;
-                    @include font-styles('Inter', normal, 400, 36px, 120%, -1.51px 2.26px 0.75px $black-opacity-0_1);
-                }
-                .date-time{
-                    margin: 10px 0 0 0;
-                    padding-left: 10px;
-                    @include flex-props(row,stretch,space-between);
-                    @include width-height(250px,28px);
-                    p{
-                        margin: 0;
-                        @include font-styles('Inter', normal, 400, 24px, 120%, -1.51px 1.26px 0.75px $black-opacity-0_1);
-                    }
-                }
-           }
-           .left-row-3{
-                padding-left: 12px;
-                @include flex-direction();
-                margin: 20px 0 30px 0;
-                .separator {
-                    padding: 10px 20px 0 8px;
-                }
-            }
-            .left-row-4{
-                @include flex-direction(row);
-                padding: 0 20px 0 10px;
-                .weather-summary{
-                @include flex-direction(row);
-                justify-content: space-between;
-                flex: 2 1 auto;
-                }
-                .forward-arrow {
-                    flex:1 1 auto;
-                    all: unset;
-                    // @include width-height(33.5px,14.5px);
-                    // @include absolute_top_left(728px,749.5px);
-                    img {
-                        filter: drop-shadow(0px 4px 4px $black-opacity-0_25);
-                    }
-                }
-            }
+        justify-content: space-between;
+        .weather-summary {
+          @include flex-direction(row);
+          justify-content: space-between;
+          margin-right: 40px;
+          flex: 1 1 auto;
         }
-        .right{
-             flex: 1 1 auto;
-            // @include width-height(576px, 900px);
-            // @include absolute_top_left(0px, 864px);
-            right: 0;
-            border: 2px solid linear-gradient($white-opacity-0_4, $white-opacity-0_2);
-            background: radial-gradient(100% 100% at 0% 0%, $white-opacity-0_4 0%, $white-opacity-0 100%);
-            box-shadow: -5px -5px 250px rgba(255, 255, 255, 0.02) inset;
-            backdrop-filter: blur(42px);
-            .right-row-1{
-                
-            }
-            .right-row-2{
-                padding: 127px 61px 9px 57px;
-                @include flex-props(row,stretch,space-between);
-            }
-            hr{
-                border: 0.6px solid $white;
-                margin: 68px 50px;
-            }
-            .right-row-3{
-                @include flex-direction();
-                @include width-height(100%);
-            }
+        .forward-arrow {
+          all: unset;
+          img {
+            filter: drop-shadow(0px 4px 4px $black-opacity-0_25);
+          }
         }
+      }
     }
+    .right {
+      flex: 1 1 auto;
+      right: 0;
+      border: 2px solid linear-gradient($white-opacity-0_4, $white-opacity-0_2);
+      background: radial-gradient(
+        100% 100% at 0% 0%,
+        $white-opacity-0_4 0%,
+        $white-opacity-0 100%
+      );
+      box-shadow: -5px -5px 250px rgba(255, 255, 255, 0.02) inset;
+      backdrop-filter: blur(42px);
+      .right-row-1 {
+        form {
+          padding: 36px 0 0 40px;
+          input {
+            @include width-height(90%, 64px);
+            border-width: 0;
+            display: flex;
+            border-radius: 20px;
+            font-size: 24px;
+            color: $secondary;
+            backdrop-filter: blur(100px);
+            background: linear-gradient(
+              116.79deg,
+              rgba(255, 255, 255, 0.48) -41.94%,
+              rgba(255, 255, 255, 0.12) 57.51%
+            );
+            box-sizing: border-box;
+            padding-left: 20px;
+            &:focus{
+              border-color: $white;
+              outline: none;
+            }
+            &::placeholder {
+              color: $secondary;
+            }
+          }
+          .submitButton {
+            all: unset;
+            display: none;
+            // @include absolute_top_left(55px);
+            // right: 70px;
+            // @include width-height(25.36px, 26px);
+            // img {
+            //   @include width-height(100%, 100%);
+            // }
+          }
+        }
+      }
+      .right-row-2 {
+        // padding: 127px 61px 9px 57px;
+        padding: 0 60px;
+        @include flex-props(row, stretch, space-between);
+      }
+      hr {
+        border: 0.6px solid $white;
+        margin: 68px 50px;
+      }
+      .right-row-3 {
+        @include flex-direction();
+        @include width-height(100%);
+      }
+    }
+  }
 }
+
+@include breakpoint(desktop) {
+   .right{
+     .right-row-1{
+       .submitButton{
+         right: 70px;
+       }
+     }
+   }
+}
+
+@include breakpoint(tablet){
+  .container{
+    .card{
+      flex-direction: column;
+      .left{
+        margin: 39px 0 0 33px;
+        .left-row-2{
+          margin-top: 8px;
+        }
+        .left-row-3{
+          padding-left: 12px;
+          @include flex-direction();
+          margin: 12px 0 20px 0;
+          .separator {
+            padding: none;
+          }
+        }
+      }
+      .right{
+          background: $primary;
+      }
+    }
+  }
+}
+
+
