@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { WeatherDetail, WeatherSummary, SunDetails, AQI_UV } from "components";
-import API from "services/api";
+import { WeatherService } from "services/api";
+import { useLocation } from "services/useLocation";
 import { Images } from "constant/images";
 import "./style.scss";
 
 function Homepage() {
+  const currentLocation = useLocation();
   const [isLoading, setLoading] = useState(true);
   const [currentLocationDetails, setCurrentLocationDetails] = useState(null);
   const [searchedLocationDetails, setSearchedLocationDetails] = useState(null);
@@ -13,14 +15,16 @@ function Homepage() {
   const [isSearched, setIsSearched] = useState(false);
   const [isFahrenheit, setIsFahrenheit] = useState(false);
   const [isActive, setActive] = useState(false);
-  const { getData, submitRequest } = API();
 
   useEffect(() => {
-    getData().then((data) => {
-      setCurrentLocationDetails(data);
-      setLoading(false);
-    });
-  }, [getData]);
+    if (currentLocation.longitude && currentLocation.latitude) {
+      WeatherService.getWeather(currentLocation)
+        .then((data) => {
+          setCurrentLocationDetails(data);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [currentLocation]);
 
   const handleChange = (e) => {
     setSearchedLocation(e.target.value);
@@ -33,12 +37,12 @@ function Homepage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const searchedData = await submitRequest(searchedLocation);
+    const searchedData = await WeatherService.submitRequest(searchedLocation);
     setSearchedLocationDetails(searchedData);
     setIsSearched(true);
   };
 
-  const { direction, water, rainy, next, search } = Images;
+  const { direction, water, rainy, search } = Images;
 
   return (
     <>
@@ -59,14 +63,16 @@ function Homepage() {
                 <div className="temp-converter">
                   <button
                     className={
-                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                      isFahrenheit ? "fahrenheit selectedTemp" : "fahrenheit"
                     }
                     onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    className={
+                      !isFahrenheit ? "celcius selectedTemp" : "celcius"
+                    }
                     onClick={() => handleToggle(false)}
                   >
                     C
@@ -195,9 +201,6 @@ function Homepage() {
                     degree={!isFahrenheit}
                   />
                 </div>
-                <button className="forward-arrow">
-                  <img src={next} alt="forward-arrow" />
-                </button>
               </div>
             </div>
             <div className="right">
@@ -418,9 +421,6 @@ function Homepage() {
                     degree={!isFahrenheit}
                   />
                 </div>
-                <button className="forward-arrow">
-                  <img src={next} alt="forward-arrow" />
-                </button>
               </div>
             </div>
             <div className="right">

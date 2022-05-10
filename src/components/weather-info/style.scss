@@ -12,10 +12,3 @@
         @include font-styles('Overpass', normal, 300, 22px, 28px, -1.39839px 2.09758px 0.699193px $black-opacity-0_1);
     }
 }
-@include breakpoint(mobile) {
-   .weather-detail {
-       p{
-           padding-right: 8px;
-       }
-   }
-}
