@@ -2,8 +2,7 @@
 @import "styles/styleFunctions.scss";
 
 .container {
-  // @include container-props(fixed);
-  // @include width-height(100%, 100%);
+  @include width-height(100%, 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +10,7 @@
     position: relative;
     color: $white;
     display: flex;
-    @include width-height(94%, auto);
+    @include width-height(100%, 100%);
     background: linear-gradient(
       to right top,
       $primary-light,
@@ -100,7 +99,6 @@
         }
         .degree_fahrenheit {
           @include width-height(43px, 38px);
-          // @include absolute_top_left(196px, 330px);
           @include font-styles(
             sans-serif,
             normal,
@@ -153,18 +151,11 @@
         @include flex-direction(row);
         padding: 0 80px 20px 10px;
         display: flex;
-        justify-content: space-between;
         .weather-summary {
           @include flex-direction(row);
           justify-content: space-between;
           margin-right: 40px;
           flex: 1 1 auto;
-        }
-        .forward-arrow {
-          all: unset;
-          img {
-            filter: drop-shadow(0px 4px 4px $black-opacity-0_25);
-          }
         }
       }
     }
@@ -234,39 +225,5 @@
   }
 }
 
-@include breakpoint(desktop) {
-   .right{
-     .right-row-1{
-       .submitButton{
-         right: 70px;
-       }
-     }
-   }
-}
-
-@include breakpoint(tablet){
-  .container{
-    .card{
-      flex-direction: column;
-      .left{
-        margin: 39px 0 0 33px;
-        .left-row-2{
-          margin-top: 8px;
-        }
-        .left-row-3{
-          padding-left: 12px;
-          @include flex-direction();
-          margin: 12px 0 20px 0;
-          .separator {
-            padding: none;
-          }
-        }
-      }
-      .right{
-          background: $primary;
-      }
-    }
-  }
-}
 
 

@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { WeatherDetail, WeatherSummary, SunDetails, AQI_UV } from "components";
-import API from "services/api";
+import { WeatherService } from "services/api";
+import { useLocation } from "services/useLocation";
 import { Images } from "constant/images";
 import "./style.scss";
 
 function Homepage() {
+  const currentLocation = useLocation();
   const [isLoading, setLoading] = useState(true);
   const [currentLocationDetails, setCurrentLocationDetails] = useState(null);
   const [searchedLocationDetails, setSearchedLocationDetails] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState();
   const [isSearched, setIsSearched] = useState(false);
   const [isFahrenheit, setIsFahrenheit] = useState(false);
-  const [isActive, setActive] = useState(false);
-  const { getData, submitRequest } = API();
 
   useEffect(() => {
-    getData().then((data) => {
-      setCurrentLocationDetails(data);
-      setLoading(false);
-    });
-  }, [getData]);
+    if (currentLocation.longitude && currentLocation.latitude) {
+      WeatherService.getWeather(currentLocation)
+        .then((data) => {
+          setCurrentLocationDetails(data);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [currentLocation]);
 
   const handleChange = (e) => {
     setSearchedLocation(e.target.value);
   };
 
   const handleToggle = (val) => {
-    setActive(!isActive);
     setIsFahrenheit(() => val);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const searchedData = await submitRequest(searchedLocation);
+    const searchedData = await WeatherService.submitRequest(searchedLocation);
     setSearchedLocationDetails(searchedData);
     setIsSearched(true);
   };
@@ -59,14 +61,16 @@ function Homepage() {
                 <div className="temp-converter">
                   <button
                     className={
-                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                      isFahrenheit ? "fahrenheit selectedTemp" : "fahrenheit"
                     }
                     onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    className={
+                      !isFahrenheit ? "celcius selectedTemp" : "celcius"
+                    }
                     onClick={() => handleToggle(false)}
                   >
                     C
@@ -282,14 +286,16 @@ function Homepage() {
                 <div className="temp-converter">
                   <button
                     className={
-                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                      isFahrenheit ? "fahrenheit selectedTemp" : "fahrenheit"
                     }
                     onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    className={
+                      !isFahrenheit ? "celcius selectedTemp" : "celcius"
+                    }
                     onClick={() => handleToggle(false)}
                   >
                     C
