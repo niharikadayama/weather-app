@@ -3,9 +3,6 @@
 
 .container {
   @include width-height(100%, 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .card {
     position: relative;
     color: $white;
@@ -224,6 +221,3 @@
     }
   }
 }
-
-
-
