@@ -14,7 +14,6 @@ function Homepage() {
   const [searchedLocation, setSearchedLocation] = useState();
   const [isSearched, setIsSearched] = useState(false);
   const [isFahrenheit, setIsFahrenheit] = useState(false);
-  const [isActive, setActive] = useState(false);
 
   useEffect(() => {
     if (currentLocation.longitude && currentLocation.latitude) {
@@ -31,7 +30,6 @@ function Homepage() {
   };
 
   const handleToggle = (val) => {
-    setActive(!isActive);
     setIsFahrenheit(() => val);
   };
 
@@ -285,14 +283,16 @@ function Homepage() {
                 <div className="temp-converter">
                   <button
                     className={
-                      isActive ? "fahrenheit selectedTemp" : "fahrenheit"
+                      isFahrenheit ? "fahrenheit selectedTemp" : "fahrenheit"
                     }
                     onClick={() => handleToggle(true)}
                   >
                     <span>F</span>
                   </button>
                   <button
-                    className={!isActive ? "celcius selectedTemp" : "celcius"}
+                    className={
+                      !isFahrenheit ? "celcius selectedTemp" : "celcius"
+                    }
                     onClick={() => handleToggle(false)}
                   >
                     C

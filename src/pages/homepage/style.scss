@@ -2,7 +2,6 @@
 @import "styles/styleFunctions.scss";
 
 .container {
-  @include container-props(absolute);
   @include width-height(100%, 100%);
   .card {
     position: relative;
