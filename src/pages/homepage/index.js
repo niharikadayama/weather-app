@@ -40,12 +40,12 @@ function Homepage() {
     setIsSearched(true);
   };
 
-  const { direction, water, rainy, next, search } = Images;
+  const { direction, water, rainy, search } = Images;
 
   return (
     <>
       {isLoading || currentLocationDetails === null ? (
-        <p>Loading...</p>
+        <p>Loading......</p>
       ) : !isSearched ? (
         <div className="container">
           <section className="card">
@@ -199,9 +199,6 @@ function Homepage() {
                     degree={!isFahrenheit}
                   />
                 </div>
-                <button className="forward-arrow">
-                  <img src={next} alt="forward-arrow" />
-                </button>
               </div>
             </div>
             <div className="right">
@@ -424,9 +421,6 @@ function Homepage() {
                     degree={!isFahrenheit}
                   />
                 </div>
-                <button className="forward-arrow">
-                  <img src={next} alt="forward-arrow" />
-                </button>
               </div>
             </div>
             <div className="right">
