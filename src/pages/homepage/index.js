@@ -45,7 +45,7 @@ function Homepage() {
   return (
     <>
       {isLoading || currentLocationDetails === null ? (
-        <p>Loading...</p>
+        <p>Loading......</p>
       ) : !isSearched ? (
         <div className="container">
           <section className="card">
